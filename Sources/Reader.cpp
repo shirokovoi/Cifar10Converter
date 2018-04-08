@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 	test_db->Open("./cifar10_test_lmdb", caffe::db::READ);
 
 	std::set<std::string> test_keys;
-	std::set<std::string> test_sizes;
+	std::set<size_t> test_sizes;
 
 	cursor = std::unique_ptr<caffe::db::Cursor>(test_db->NewCursor());
 	while (cursor->valid())
@@ -55,7 +55,7 @@ int main(int argc, char** argv)
 		if (!is_first)
 			ss << " ";
 		is_first = false;
-		ss << s;
+		ss << (int)s;
 	}
 
 	std::stringstream test_ss;
@@ -65,7 +65,7 @@ int main(int argc, char** argv)
 		if (!is_first)
 			ss << " ";
 		is_first = false;
-		ss << s;
+		ss << (int)s;
 	}
 	INFO("Train set contains " << keys.size() << " records and " << sizes.size() << " values with different size (" << ss.str() << ")");
 	INFO("Test set contains " << test_keys.size() << " record and " << test_sizes.size() << " values with different size (" << test_ss.str() << ")");
