@@ -19,7 +19,7 @@ public:
 
 extern std::unique_ptr<Logger> g_Log;
 
-#define ERROR(msg) do                        \
+#define MERROR(msg) do                       \
                    {                         \
                      std::stringstream ss;   \
                      ss << msg;              \

@@ -43,7 +43,7 @@ std::unique_ptr<Logger> g_Log;
 
 int main(int argc, char** argv)
 {
-	g_Log = std::make_unique<Logger>();
+	g_Log = std::make_unique<DefaultLogger>();
 
 	const int batches_number = 5;
 	const int images_per_batch = 10000;
@@ -64,7 +64,7 @@ int main(int argc, char** argv)
 			auto image = batch->GetNext();
 			if (!image)
 			{
-				ERROR("Can't get next image #" << image_index << " from batch #" << batch_index);
+				MERROR("Can't get next image #" << image_index << " from batch #" << batch_index);
 				return -1;
 			}
 
@@ -95,7 +95,7 @@ int main(int argc, char** argv)
 		auto image = test_batch->GetNext();
 		if (!image)
 		{
-			ERROR("Can't get next image #" << image_index << " from test batch");
+			MERROR("Can't get next image #" << image_index << " from test batch");
 			return -1;
 		}
 
