@@ -16,7 +16,7 @@ std::unique_ptr<Batch> Batch::FromFile(const std::string &path)
 	auto file = std::make_unique<std::ifstream>(path);
 	if (!file->is_open())
 	{
-		ERROR("Failed to open \"" << path << "\"");
+		MERROR("Failed to open \"" << path << "\"");
 		return std::unique_ptr<Batch>();
 	}
 
