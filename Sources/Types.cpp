@@ -4,6 +4,8 @@
 
 #include <Types.hpp>
 
+std::unique_ptr<Logger> g_Log;
+
 Size::Size():
     m_Width(0),
     m_Height(0)
@@ -19,4 +21,3 @@ std::ostream& operator<<(std::ostream& s, const Size& size)
 	s << size.m_Width << 'x' << size.m_Height;
 	return s;
 }
-

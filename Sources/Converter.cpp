@@ -13,33 +13,8 @@
 #include <caffe/util/db.hpp>
 #include <caffe/util/format.hpp>
 #include <caffe/proto/caffe.pb.h>
-#include "Cxx.hpp"
-
-class DefaultLogger: public Logger
-{
-public:
-	void Info(const std::string& message) override
-	{
-		PutFormatedTime(std::cout);
-		std::cout << ": \033[1;32m" << message << "\033[0m" << std::endl;
-	}
-
-	void Error(const std::string& message) override
-	{
-		PutFormatedTime(std::cerr);
-		std::cerr << ": \033[1;31m" << message << "\033[0m" << std::endl;
-	}
-
-private:
-	void PutFormatedTime(std::ostream& s)
-	{
-		std::time_t t = std::time(nullptr);
-		std::tm tm = *std::localtime(&t);
-		s << std::put_time(&tm, "%F %T");
-	}
-};
-
-std::unique_ptr<Logger> g_Log;
+#include <Cxx.hpp>
+#include <DefaultLogger.hpp>
 
 int main(int argc, char** argv)
 {

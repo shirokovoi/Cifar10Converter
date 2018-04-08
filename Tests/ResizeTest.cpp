@@ -33,20 +33,6 @@ std::shared_ptr<Image> ReadImage()
 		image->m_Data[i] = (uint8_t)value;
 	}
 
-//	for (int line = 0; line < resolution.m_Height; line++)
-//	{
-//		for (int column = 0; column < resolution.m_Width; column++)
-//		{
-//			uint8_t* data = image->m_Data.data() + 3 * line * resolution.m_Width +  3 * column;
-//			for (int i = 0; i < 3; i++)
-//			{
-//				int value = 0;
-//				input >> value;
-//				data[i] = (uint8_t)value;
-//			}
-//		}
-//	}
-
 	return image;
 }
 
