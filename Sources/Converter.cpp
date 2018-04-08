@@ -29,7 +29,7 @@ int main(int argc, char** argv)
 	train_db->Open("./cifar10_train_lmdb", caffe::db::NEW);
 	std::unique_ptr<caffe::db::Transaction> train_transaction(train_db->NewTransaction());
 
-	for (int batch_index = 0; batch_index < batches_number; batch_index++)
+	for (int batch_index = 1; batch_index < batches_number + 1; batch_index++)
 	{
 		const std::string batch_path = "./data_batch_" + std::to_string(batch_index) + ".bin";
 		auto batch = Batch::FromFile(batch_path);
@@ -56,6 +56,8 @@ int main(int argc, char** argv)
 			int key = batch_index * images_per_batch + image_index;
 			train_transaction->Put(std::to_string(key), serialized);
 		}
+
+		INFO("Batch #" << batch_index << " processed");
 	}
 
 	train_transaction->Commit();
@@ -80,10 +82,12 @@ int main(int argc, char** argv)
 		datum.set_width(resized->m_Size.m_Width);
 		datum.set_height(resized->m_Size.m_Height);
 		datum.set_label(resized->m_Label);
+		datum.set_data(resized->m_Data.data(), resized->m_Data.size());
 		std::string serialized;
 		datum.SerializeToString(&serialized);
 		test_transaction->Put(std::to_string(image_index), serialized);
 	}
+	INFO("Test batch processed");
 
 	test_transaction->Commit();
 	test_db->Close();
