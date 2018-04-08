@@ -102,6 +102,7 @@ int main(int argc, char** argv)
 		datum.set_width(resized->m_Size.m_Width);
 		datum.set_height(resized->m_Size.m_Height);
 		datum.set_label(resized->m_Label);
+		datum.set_data(resized->m_Data.data(), resized->m_Data.size());
 		std::string serialized;
 		datum.SerializeToString(&serialized);
 		test_transaction->Put(std::to_string(image_index), serialized);
